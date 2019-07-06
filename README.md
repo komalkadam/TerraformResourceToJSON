@@ -1,8 +1,6 @@
 GoToJson
 ========
 
-# GoToJson
-This will convert your terraform resources into json for REAN Deploy
 
 Steps to use the utility
 ------------------------
