@@ -1,0 +1,217 @@
+{
+	"name": "aws_instance",
+	"shortName": "",
+	"displayName": "",
+	"tagsSupport": false,
+	"idAttribute": "",
+	"style": "",
+	"image": "",
+	"provider": "",
+	"Attributes": [
+		{
+			"name": "credit_specification",
+			"type": "StringArray",
+			"required": "false"
+		},
+		{
+			"name": "security_groups",
+			"type": "JSONArray",
+			"required": "false"
+		},
+		{
+			"name": "ipv6_address_count",
+			"type": "Integer",
+			"required": "false"
+		},
+		{
+			"name": "private_dns",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "arn",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "user_data",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "ebs_optimized",
+			"type": "boolean",
+			"required": "false"
+		},
+		{
+			"name": "root_block_device",
+			"type": "StringArray",
+			"required": "false"
+		},
+		{
+			"name": "placement_group",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "vpc_security_group_ids",
+			"type": "JSONArray",
+			"required": "false"
+		},
+		{
+			"name": "public_ip",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "monitoring",
+			"type": "boolean",
+			"required": "false"
+		},
+		{
+			"name": "ipv6_addresses",
+			"type": "StringArray",
+			"required": "false"
+		},
+		{
+			"name": "volume_tags",
+			"type": "",
+			"required": "false"
+		},
+		{
+			"name": "source_dest_check",
+			"type": "boolean",
+			"required": "false",
+			"defaultValue": "true"
+		},
+		{
+			"name": "network_interface_id",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "user_data_base64",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "network_interface",
+			"type": "JSON",
+			"required": "false",
+			"sampleValue": "map[delete_on_termination:0xc00037e400 device_index:0xc00037e600 network_interface_id:0xc00037e500]"
+		},
+		{
+			"name": "instance_state",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "host_id",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "cpu_core_count",
+			"type": "Integer",
+			"required": "false"
+		},
+		{
+			"name": "associate_public_ip_address",
+			"type": "boolean",
+			"required": "false"
+		},
+		{
+			"name": "subnet_id",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "password_data",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "private_ip",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "iam_instance_profile",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "ebs_block_device",
+			"type": "JSON",
+			"required": "false",
+			"sampleValue": "map[delete_on_termination:0xc00037ea00 device_name:0xc00037eb00 encrypted:0xc00037ec00 iops:0xc00037ed00 snapshot_id:0xc00037ee00 volume_id:0xc00037f100 volume_size:0xc00037ef00 volume_type:0xc00037f000]"
+		},
+		{
+			"name": "ephemeral_block_device",
+			"type": "JSON",
+			"required": "false",
+			"sampleValue": "map[device_name:0xc00037f200 no_device:0xc00037f400 virtual_name:0xc00037f300]"
+		},
+		{
+			"name": "ami",
+			"type": "String",
+			"required": "true"
+		},
+		{
+			"name": "key_name",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "instance_initiated_shutdown_behavior",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "instance_type",
+			"type": "String",
+			"required": "true"
+		},
+		{
+			"name": "disable_api_termination",
+			"type": "boolean",
+			"required": "false"
+		},
+		{
+			"name": "public_dns",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "primary_network_interface_id",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "tenancy",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "cpu_threads_per_core",
+			"type": "Integer",
+			"required": "false"
+		},
+		{
+			"name": "tags",
+			"type": "",
+			"required": "false"
+		},
+		{
+			"name": "availability_zone",
+			"type": "String",
+			"required": "false"
+		},
+		{
+			"name": "get_password_data",
+			"type": "boolean",
+			"required": "false",
+			"defaultValue": "false"
+		}
+	]
+}
