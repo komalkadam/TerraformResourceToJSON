@@ -1,9 +1,10 @@
 package aws
 
 import (
-   "github.com/hashicorp/terraform/helper/schema"
+	"github.com/hashicorp/terraform/helper/schema"
 )
 
 func GetResourceSchema() *schema.Resource {
-    return  dataSourceAwsDbInstance()
+	//Change the method name here
+	return dataSourceAwsDbInstance()
 }

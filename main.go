@@ -34,7 +34,9 @@ type TerraformResource struct {
 
 func main() {
 	var v = aws.GetResourceSchema()
-	var resource TerraformResource = TerraformResource{Name: "aws_instance"}
+	//Update the resource name here
+	var resourceName string = "aws_instance"
+	var resource TerraformResource = TerraformResource{Name: resourceName}
 	var terraformAttributes []TerraformAttribute = []TerraformAttribute{}
 	resource.Attributes = terraformAttributes
 
