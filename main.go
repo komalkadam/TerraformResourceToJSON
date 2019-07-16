@@ -2,6 +2,7 @@ package main
 
 import (
 	//"github.com/hashicorp/terraform/helper/schema"
+
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -49,6 +50,16 @@ type TerraformResource struct {
 	Attributes  []TerraformAttribute `json:"attributes"`
 }
 
+// Contains tells whether a contains x.
+func Contains(a []string, x string) bool {
+	for _, n := range a {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}
+
 func main() {
 	var v = aws.GetResourceSchema()
 	//Update the resource name here
@@ -83,11 +94,24 @@ func main() {
 	stops[1]["color"] = "#F2F2F2"
 
 	resource.Style.Body.FillObject.Stops = stops
+	fmt.Println("attributes  ::", Attributes_array)
 
 	for k, va := range v.Schema {
-		if va.Computed {
+
+		/* if !va.Optional && va.Computed {
 			continue
 		}
+
+		if va.Optional && va.Computed {
+			fmt.Println("Verfiy attribute its marked as Optional and computed as well ::", k)
+		} */
+		//fmt.Println(k)
+
+		if !Contains(Attributes_array, k) {
+			//fmt.Println("======" + k)
+			continue
+		}
+
 		var attribute TerraformAttribute = TerraformAttribute{}
 		attribute.Name = k
 		var dataTypeStr = va.Type.String()
