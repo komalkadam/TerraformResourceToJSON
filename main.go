@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"reflect"
+	"strings"
 
 	"github.com/terraform-providers/terraform-provider-aws/aws"
 )
@@ -67,8 +68,8 @@ func main() {
 	var resource TerraformResource = TerraformResource{Name: resourceName}
 	var terraformAttributes []TerraformAttribute = []TerraformAttribute{}
 	resource.Attributes = terraformAttributes
-	resource.ShortName = resourceName
-	resource.DisplayName = resourceName
+	resource.ShortName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
+	resource.DisplayName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
 	resource.Provider = "aws"
 	resource.Image = "/images/aws/ec2/Compute_AmazonEC2_instance.png"
 
