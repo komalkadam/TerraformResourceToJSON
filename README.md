@@ -9,7 +9,7 @@ Steps to use the utility
 * Execute `go get github.com/terraform-providers/terraform-provider-aws/aws`
 * Prepare your resources csv
    ```
-   aws_default_vpc,resourceAwsDefaultVpc,default_vpc.html
+    aws_default_vpc,resourceAwsDefaultVpc,default_vpc.html
     aws_ami_from_instance,resourceAwsAmiFromInstance,ami_from_instance.html
     ```
 Fist Column: Terraform resource name
