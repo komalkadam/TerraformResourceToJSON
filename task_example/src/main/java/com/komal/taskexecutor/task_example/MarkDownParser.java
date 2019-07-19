@@ -46,11 +46,13 @@ public class MarkDownParser {
 	 */
 	public static void main(String[] args) {
 		List<String> attributeList = new ArrayList<>();
-		String provider_type = "aws";
-		String released_version = "v1.60.0";
 		//String resource_name = "ec2_capacity_reservation";
 		//String resource_name = "ec2_client_vpn_endpoint" + ".html";
-		String markdown_file_name = "ami_from_instance.html";
+		//String markdown_file_name = "security_center_subscription_pricing";
+		String markdown_file_name = args[0];
+		String provider_type = args[1];
+		String released_version = args[2];
+
 		parseAndGetAttributeList(attributeList, provider_type, released_version, markdown_file_name);
 		writeAtributesToFile(attributeList);
 		
