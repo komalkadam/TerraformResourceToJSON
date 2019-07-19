@@ -1,0 +1,2 @@
+aws_default_vpc,resourceAwsDefaultVpc,default_vpc.html
+aws_ami_from_instance,resourceAwsAmiFromInstance,ami_from_instance.html
