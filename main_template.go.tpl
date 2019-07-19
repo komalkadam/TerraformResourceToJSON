@@ -62,7 +62,7 @@ func Contains(a []string, x string) bool {
 }
 
 func main() {
-	var v = aws.GetResourceSchema()
+	var v = terraform_provider.GetResourceSchema()
 	//Update the resource name here
 	var resourceName string = os.Args[1]
 	var resource TerraformResource = TerraformResource{Name: resourceName}

@@ -18,11 +18,12 @@ then
    echo $PROVIDER_PATH
 elif [ $PROVIDER_TYPE == "azurerm" ]
 then
-   COPY_FILE_LOCATION="~/go/src/github.com/terraform-providers/terraform-provider-azurerm/aws/deploy.go"
+   COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-azurerm/azurerm/deploy.go"
    PROVIDER_PATH="github.com/terraform-providers/terraform-provider-azurerm/azurerm"
 fi
 
 sed "s+terraform_provider_path+${PROVIDER_PATH}+g" main_template.go.tpl > main_template.go
+sed "s/terraform_provider/${PROVIDER_TYPE}/g" main_template.go > main_template1.go
 
 INPUT=$input_csv
 OLDIFS=$IFS
@@ -38,15 +39,18 @@ do
 	#wait $markdown_generation
 	cd -
 	sed "s/provider_type/${PROVIDER_TYPE}/g" resource_template.go > deploy.go
+	
 	sed "s/method_name/${methodname}/g" deploy.go > deploy1.go
 	
 	
 	
+	
 	cp deploy1.go $COPY_FILE_LOCATION
-	go run attributes.go main_template.go $resourcename
+	go run attributes.go main_template1.go $resourcename
 	rm deploy1.go
 	rm deploy.go
 done < $INPUT
 IFS=$OLDIFS
 
 rm main_template.go
+rm main_template1.go
