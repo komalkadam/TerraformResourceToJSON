@@ -43,14 +43,15 @@ public class MarkDownParser {
 
 	/**
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		List<String> attributeList = new ArrayList<>();
-		String provider_type = "aws";
-		String released_version = "v1.60.0";
+		String provider_type = args[0];
+		String released_version = args[1];
 		//String resource_name = "ec2_capacity_reservation";
 		//String resource_name = "ec2_client_vpn_endpoint" + ".html";
-		String markdown_file_name = "ami_from_instance.html";
+		String markdown_file_name = args[2];
 		parseAndGetAttributeList(attributeList, provider_type, released_version, markdown_file_name);
 		writeAtributesToFile(attributeList);
 		
@@ -58,7 +59,7 @@ public class MarkDownParser {
 
 
 	private static void parseAndGetAttributeList(List<String> attributeList, String provider_type, String released_version,
-			String markdown_file_name) {
+			String markdown_file_name) throws Exception {
 		String url = getMarkdownURL(provider_type, released_version, markdown_file_name);
 		String localFilename = markdown_file_name + ".markdown";
 		try {
@@ -88,14 +89,19 @@ public class MarkDownParser {
 				}
 				
 			}
-			Node AttrubuteChilds = doc.jjtGetChild(argumentNodeNumber + 2);
+			int attributeListIndex = argumentNodeNumber+2;
+			if (attributeListIndex == -1) {
+				throw new Exception("Attributes not found");
+			}
+				
+			Node AttrubuteChilds = doc.jjtGetChild(attributeListIndex);
 			if (AttrubuteChilds != null) {
 				int totalchildren  = AttrubuteChilds.jjtGetNumChildren();
 				for (int i = 0; i < totalchildren; i++) {
 					Node ithChild = AttrubuteChilds.jjtGetChild(i);
-					for (int j = 0; j < ithChild.jjtGetNumChildren(); j++) {
+					//for (int j = 0; j < ithChild.jjtGetNumChildren(); j++) {
 						//String string = ithChild[j];
-						Node itemChild = ithChild.jjtGetChild(j);
+						Node itemChild = ithChild.jjtGetChild(0);
 						if (itemChild instanceof Paragraph) {
 							String attributeName = "";
 							String attributeDesc = "";
@@ -118,7 +124,7 @@ public class MarkDownParser {
 						}
 						//System.out.println("Item child : " +itemChild.toString());
 						
-					}					
+					//}					
 					//((Item)ithChild).
 					//System.out.println(ithChild);
 					
@@ -133,6 +139,9 @@ public class MarkDownParser {
 		}
 		new File(localFilename).delete();
 	}
+
+
+	
 
 
 	private static void writeAtributesToFile(List<String> attributeList) {
