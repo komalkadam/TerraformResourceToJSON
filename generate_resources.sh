@@ -20,6 +20,15 @@ elif [ $PROVIDER_TYPE == "azurerm" ]
 then
    COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-azurerm/azurerm/deploy.go"
    PROVIDER_PATH="github.com/terraform-providers/terraform-provider-azurerm/azurerm"
+elif [ $PROVIDER_TYPE == "vsphere" ]
+then
+   COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-vsphere/vsphere/deploy.go"
+   PROVIDER_PATH="github.com/terraform-providers/terraform-provider-vsphere/vsphere"
+elif [ $PROVIDER_TYPE == "nsxt" ]
+then
+   COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-nsxt/nsxt/deploy.go"
+   PROVIDER_PATH="github.com/terraform-providers/terraform-provider-nsxt/nsxt"
+
 fi
 
 sed "s+terraform_provider_path+${PROVIDER_PATH}+g" main_template.go.tpl > main_template.go
@@ -43,10 +52,10 @@ do
 	sed "s/method_name/${methodname}/g" deploy.go > deploy1.go
 	
 	
-	
+
 	
 	cp deploy1.go $COPY_FILE_LOCATION
-	go run attributes.go main_template1.go $resourcename
+	go run attributes.go main_template1.go $resourcename $PROVIDER_TYPE
 	rm deploy1.go
 	rm deploy.go
 done < $INPUT

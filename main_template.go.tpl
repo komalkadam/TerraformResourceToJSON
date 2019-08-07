@@ -65,13 +65,19 @@ func main() {
 	var v = terraform_provider.GetResourceSchema()
 	//Update the resource name here
 	var resourceName string = os.Args[1]
+	var providerType string = os.Args[2]
 	var resource TerraformResource = TerraformResource{Name: resourceName}
 	var terraformAttributes []TerraformAttribute = []TerraformAttribute{}
 	resource.Attributes = terraformAttributes
 	resource.ShortName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
 	resource.DisplayName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
-	resource.Provider = "aws"
-	resource.Image = "/images/aws/ec2/Compute_AmazonEC2_instance.png"
+	resource.Provider = providerType
+	 
+	if providerType == "aws" {
+		resource.Image = "/images/aws/ec2/Compute_AmazonEC2_instance.png"
+	} else if providerType == "vsphere" {
+		resource.Image = "/images/vsphere/vm.png"
+	}
 
 	resource.Style = TerraformStyle{}
 	resource.Style.Body = StyleBody{}
@@ -117,6 +123,9 @@ func main() {
 		attribute.Name = k
 		var dataTypeStr = va.Type.String()
 
+				//fmt.Println("attribute ::"+ attribute.Name + " dataTypeStr::"+ dataTypeStr)
+
+
 		if va.Required {
 			attribute.Required = "true"
 		} else {
@@ -125,24 +134,26 @@ func main() {
 
 		if va.Default != nil {
 			attribute.DefaultValue = fmt.Sprintf("%v", va.Default)
-			//fmt.Println("Default value:", va.Default)
+			////fmt.Println("Default value:", va.Default)
 		}
 
-		if Contains(Attributes_array, "tags") {
+		if attribute.Name == "tags" && Contains(Attributes_array, "tags") {
 			resource.TagsSupport = true
 			attribute.AttributeType = "JSON"
 			terraformAttributes = append(terraformAttributes, attribute)
 			continue
 		}
-
 		switch dataTypeStr {
 		case "TypeString":
+			//fmt.Println("attribute ::"+ attribute.Name + " String dataTypeStr::"+ dataTypeStr)
 			attribute.AttributeType = "String"
 
 		case "TypeInt":
+			//fmt.Println("attribute ::"+ attribute.Name + " int dataTypeStr::"+ dataTypeStr)
 			attribute.AttributeType = "Integer"
 
 		case "TypeList":
+			//fmt.Println("attribute ::"+ attribute.Name + " list dataTypeStr::"+ dataTypeStr)
 			//attribute.AttributeType = "StringArray"
 			if va.Elem != nil {
 				var schemaDataType = reflect.TypeOf(va.Elem).String()
@@ -158,10 +169,11 @@ func main() {
 			}
 
 		case "TypeBool":
+			////fmt.Println("attribute ::"+ attribute.Name + " boolean dataTypeStr::"+ dataTypeStr)
 			attribute.AttributeType = "boolean"
 
 		case "TypeSet":
-
+			//fmt.Println("attribute ::"+ attribute.Name + " set dataTypeStr::"+ dataTypeStr)
 			if va.Elem != nil {
 				var schemaDataType = reflect.TypeOf(va.Elem).String()
 
@@ -177,7 +189,7 @@ func main() {
 
 			} */
 		case "TypeMap":
-
+			////fmt.Println("attribute ::"+ attribute.Name + " map dataTypeStr::"+ dataTypeStr)
 			if va.Elem != nil {
 				var schemaDataType = reflect.TypeOf(va.Elem).String()
 
@@ -210,5 +222,6 @@ func getSampleValue(d interface{}, attribute TerraformAttribute) string {
 	var str string = fmt.Sprintf("%v", f.Interface())
 	fmt.Println("Update sample value of attribute name: ", attribute.Name)
 	return str
+
 
 }

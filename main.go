@@ -65,13 +65,21 @@ func main() {
 	var v = aws.GetResourceSchema()
 	//Update the resource name here
 	var resourceName string = os.Args[1]
+	var providerType string = os.Args[2]
+
 	var resource TerraformResource = TerraformResource{Name: resourceName}
 	var terraformAttributes []TerraformAttribute = []TerraformAttribute{}
 	resource.Attributes = terraformAttributes
 	resource.ShortName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
 	resource.DisplayName = strings.Title(strings.ReplaceAll(resourceName, "_", " "))
-	resource.Provider = "aws"
-	resource.Image = "/images/aws/ec2/Compute_AmazonEC2_instance.png"
+
+	resource.Provider = providerType
+
+	if providerType == "aws" {
+		resource.Image = "/images/aws/ec2/Compute_AmazonEC2_instance.png"
+	} else if providerType == "vsphere" {
+		resource.Image = "/images/vsphere/vm.png"
+	}
 
 	resource.Style = TerraformStyle{}
 	resource.Style.Body = StyleBody{}
