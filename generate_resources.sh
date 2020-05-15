@@ -28,6 +28,10 @@ elif [ $PROVIDER_TYPE == "nsxt" ]
 then
    COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-nsxt/nsxt/deploy.go"
    PROVIDER_PATH="github.com/terraform-providers/terraform-provider-nsxt/nsxt"
+elif [ $PROVIDER_TYPE == "opc" ]
+then
+   COPY_FILE_LOCATION=$HOME"/go/src/github.com/terraform-providers/terraform-provider-opc/opc/deploy.go"
+   PROVIDER_PATH="github.com/terraform-providers/terraform-provider-opc/opc"
 
 fi
 
